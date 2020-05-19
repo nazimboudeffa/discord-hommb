@@ -30,6 +30,9 @@ hommb.on('message', msg => {
   if (msg.content === '!ping') {
     msg.reply('Pong!');
   }
+  if (msg.content === '!life') {
+    msg.reply('You have 7 lifes');
+  }
 });
 
 hommb.login(process.env.TOKEN);
