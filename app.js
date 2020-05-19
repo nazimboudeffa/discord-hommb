@@ -23,7 +23,7 @@ app.listen(port, function () {
 })
 
 hommb.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Logged in as ${hommb.user.tag}!`);
 });
 
 hommb.on('message', msg => {
