@@ -4,4 +4,6 @@ My first Discord bot, that will trigger some RP
 
 # How To
 
-follow this awesome tutorial https://www.youtube.com/watch?v=errnVwm_3mI
+Follow this awesome tutorial https://www.youtube.com/watch?v=errnVwm_3mI
+
+Join my Discord server to discuss how it works, it's juste the beginning https://discord.gg/EpZTKMb
