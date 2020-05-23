@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const { CONFIG_TOKEN } = require('./config.json');
+//const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./data.json');
 
 const client = new Discord.Client();
