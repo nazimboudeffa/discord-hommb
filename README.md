@@ -57,9 +57,9 @@ Si tout s'est bien passé, il devrait apparaître **Logged in** dans la console,
 
 ## Hébergement
 
-⚠ La solution que je propose utilise l'hébergeur **Heroku**, c'est ce que je connais de plus abordable, mais il existe d'autres méthodes ! 
+⚠ La solution que je propose utilise l'hébergeur **Heroku**, c'est ce que je connais de plus abordable, mais il existe d'autres méthodes !
 
-1. Toujours dans le même dossier, créer un fichier `package.json` et copier dedans le contenu suivant : 
+1. Toujours dans le même dossier, créer un fichier `package.json` et copier dedans le contenu suivant :
 ```json
 {
 	"name": "Nom du bot",
@@ -97,5 +97,8 @@ const token = client.login(process.env.TOKEN);
 
 10. Aller dans l'onglet **Settings**, cliquer sur **Reveal Config Vars**, saisir "TOKEN" dans la case `KEY` et le token du bot dans la case `VALUE`. Valider en cliquant sur **Add**.
 
-Le bot est maintenant hébergé en ligne, il est accessible depuis n'importe où et à n'importe quel moment ! 🌍🤖💬
+11. Aller dans l'onglet **Ressources**, cliquer sur le crayon pour désactiver **Web** et activer **Worker**.
 
+12. (Optionnel) Pour lire de la musique avec le bot, il faut ajouter un buildpack FFmpeg dans l'onglet Settings sur Heroku.
+
+Le bot est maintenant hébergé en ligne, il est accessible depuis n'importe où et à n'importe quel moment ! 🌍🤖💬
