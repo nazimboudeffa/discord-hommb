@@ -11,10 +11,8 @@ const path = require('path')
 
 const Game = require('./game.js');
 
-var isPlaying = false;
-var voiceChannel, dispatcher;
-
-var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = CONFIG_TOKEN || process.env.TOKEN
+var token = process.env.TOKEN
 var port = 3000 || process.env.PORT
 
 // set the view engine to ejs
