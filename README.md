@@ -1,4 +1,4 @@
-# Heroes of Might and Magic Bot for Discord
+# Heroes of Might and Magic Bot pour Discord
 
 1. Installer [Node.js](https://nodejs.org/en/).
 
@@ -96,10 +96,6 @@ const token = client.login(process.env.TOKEN);
 9. Encore en dessous, cliquer sur **Deploy Branch**. Vérifier que le build réussisse.
 
 10. Aller dans l'onglet **Settings**, cliquer sur **Reveal Config Vars**, saisir "TOKEN" dans la case `KEY` et le token du bot dans la case `VALUE`. Valider en cliquant sur **Add**.
-
-11. Aller dans l'onglet **Ressources**, cliquer sur le crayon pour désactiver **Web** et activer **Worker**.
-
-12. (Optionnel) Pour lire de la musique avec le bot, il faut ajouter un buildpack FFmpeg dans l'onglet Settings sur Heroku.
 
 Le bot est maintenant hébergé en ligne, il est accessible depuis n'importe où et à n'importe quel moment ! 🌍🤖💬
 
