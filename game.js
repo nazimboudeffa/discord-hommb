@@ -63,7 +63,7 @@ class Game {
         for(var x = 0; x < this.currentPlayer.length; x++){
             if(this.currentPlayer[x].playerName===currPlayer){
             if(this.currentPlayer[x].health <= 0){
-                return [`\nYou are dead. Type !new to refresh your stats!`];
+                return [`\nYou are dead. Type h!new to refresh your stats!`];
             }
           }
         }
@@ -79,7 +79,7 @@ class Game {
             }
         }
         else{
-            return [`\nType !newgame to refresh your stats!`];
+            return [`\nType h!new to refresh your stats!`];
         }
      }
 
@@ -94,13 +94,19 @@ class Game {
         let totalPlayers = [];
 
         for(var x = 0; x < this.currentPlayer.length; x++){
-            if(this.currentPlayer[x].index===99 || this.currentPlayer[x].index === undefined){
-                this.currentPlayer[x].index='type !save to save your progress';
-            }
-            totalPlayers.push([`ID: [${this.currentPlayer[x].index}] [${this.currentPlayer[x].playerName}]`]);
+          totalPlayers.push([`ID: [${this.currentPlayer[x].index}] [${this.currentPlayer[x].playerName}]`]);
         }
         console.log(totalPlayers);
         return totalPlayers;
+    }
+
+    /* displays players currently online */
+    getStats(currPlayer){
+      for(var x = 0; x < this.currentPlayer.length; x++){
+          if(this.currentPlayer[x].playerName===currPlayer){
+              return this.currentPlayer[x].health;
+          }
+      }
     }
 
     /* refresh stats */
@@ -108,12 +114,12 @@ class Game {
         for(var x = 0; x < this.currentPlayer.length; x++){
             if(this.currentPlayer[x].playerName===currPlayer){
             if(this.currentPlayer[x].health <= 0){
-                this.monster[0].hp = Math.floor(Math.random() * 50);
+                //this.monster[0].hp = Math.floor(Math.random() * 50);
                 this.currentPlayer[x].health = 150;
-                return [`You feel good as new and you can !fight again.`];
             }
           }
         }
+        return [`You feel good as new and you can h!fight again.`];
     }
 }
 

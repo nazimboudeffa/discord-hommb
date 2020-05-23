@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-//const { CONFIG_TOKEN } = require('./config.json');
+const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./data.json');
 
 const client = new Discord.Client();
@@ -11,8 +11,8 @@ const path = require('path')
 
 const Game = require('./game.js');
 
-//var token = CONFIG_TOKEN || process.env.TOKEN
-var token = process.env.TOKEN
+var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
@@ -29,22 +29,30 @@ app.listen(port, function () {
   console.log('HoMMB app listening on port 3000!')
 })
 
+const prefix = 'h!';
+
 let playersName = []; // tracks each player that joins
 let playersSaveFile = [];
 let currPlayers = 0; //tracker for total players online
-let INIT_GAME; //Initilizes our game engine
+let quest; //Initilizes our game engine
 let userJoined = false;
 let inBattle = false;
 let session_id;
 let currentUser;
 
 /* User joins the server */
-client.on('message', (msg) => {
-    if(msg.content === '!join'){
+client.on('message', (message) => {
+
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).split('!');
+    const command = args.shift().toLowerCase();
+
+    if(command === 'join'){
 
         // Prevents multiple instances of the same person from joining
         for(var x = 0; x < playersName.length; x++){
-            if(playersName[x].playerName===msg.author.username){
+            if(playersName[x].playerName===message.author.username){
                 return playersName[x].playerName;
             }
          }
@@ -52,16 +60,16 @@ client.on('message', (msg) => {
         function checkData(){
         // Checks the object that stores players data so they can retrieve their saved progress
         for(var s = 0; s < playersSaveFile.length; s++){
-            if(playersSaveFile[s].playerName===msg.author.username){
+            if(playersSaveFile[s].playerName===message.author.username){
                 for(var y = 0; y < playersName.length; y++){
                 /* If the name in the save file object matches the name of the current user online, retrieve
                 that specific persons saved progress */
                 if(playersName[y].playerName===playersSaveFile[s].playerName){
-                msg.channel.send('This player has a saved file!');
+                message.channel.send('This player has a saved file!');
                 /* Grab the index from the saved file and set it to the index of the current players object
                 This is where you load all the players progress(such as health,damage,id,etc) */
                 playersName[y].index=playersSaveFile[s].index;
-                msg.channel.send('Saved file has been loaded.');
+                message.channel.send('Saved file has been loaded.');
                 } else{
                    }
                 }
@@ -70,14 +78,14 @@ client.on('message', (msg) => {
         }
 
         function init(){
-            INIT_GAME = new Game(playersName, client, 'bot-testing', currPlayers);
-            let myRet = INIT_GAME.startGame();
+            quest = new Game(playersName, client, 'hommb-quest', currPlayers);
+            let myRet = quest.startGame();
             const embed = new Discord.MessageEmbed()
             .setTitle("Welcome to Heroes of Might and Magic")
             .setColor(0xFF0000)
-            .addField(`${msg.author.username} has Joined`, myRet);
-            msg.channel.send(embed);
-            msg.channel.send(`${msg.author} type !commands to see the list of commands.`);
+            .addField(`${message.author.username} has Joined`, myRet);
+            message.channel.send(embed);
+            message.channel.send(`${message.author} type h!commands to see the list of commands.`);
             return;
         }
 
@@ -87,7 +95,7 @@ client.on('message', (msg) => {
 
         // Creates a new object to store information about the player who joined
         playersName.push({
-            "playerName": msg.author.username,
+            "playerName": message.author.username,
             "index": 99,
             "health": 150,
             "inBattle": false
@@ -99,20 +107,20 @@ client.on('message', (msg) => {
 
     /* User types the fight command */
     if(userJoined == true){
-        if(msg.content === '!fight'){
+        if(command === 'fight'){
             for(var d = 0; d < playersName.length; d++){
                 session_id = playersName[d];
             }
 
             console.log("You attacked monster.");
-            currentUser = msg.author.username;
+            currentUser = message.author.username;
             let grabCurrPlayer = currentUser;
             let playerStats = session_id;
-            msg.channel.send(`${INIT_GAME.initBattle(grabCurrPlayer, playerStats)}`);
+            message.channel.send(`${quest.initBattle(grabCurrPlayer, playerStats)}`);
         }
 
-        else if(msg.content === '!leave'){
-            let tempLeave = msg.author.username;
+        else if(command === 'leave'){
+            let tempLeave = message.author.username;
 
             for(var x = 0; x < playersName.length; x++){
                 if(playersName[x].playerName === tempLeave){
@@ -120,35 +128,44 @@ client.on('message', (msg) => {
                     currPlayers--;
                 }
             }
-            msg.channel.send([`${tempLeave} has left the quest.`]);
+            message.channel.send([`${tempLeave} has left the quest.`]);
             // userJoined = false;
         }
 
         /* Rejuvanates players and monster hitpoints */
-        else if(msg.content === '!new'){
-            msg.channel.send(INIT_GAME.newGame(session_id));
+        else if(command === 'new'){
+          currentUser = message.author.username;
+          let grabCurrPlayer = currentUser;
+          message.channel.send(quest.newGame(currentUser));
+        }
+
+        /* Rejuvanates players and monster hitpoints */
+        else if(command === 'stats'){
+            currentUser = message.author.username;
+            let grabCurrPlayer = currentUser;
+            message.channel.send(quest.getStats(currentUser));
         }
 
         /* Simply checks the bonus damage. command for developer*/
-        else if(msg.content === '!bonus'){
-            msg.channel.send(INIT_GAME.bonusAttack());
+        else if(command === 'bonus'){
+            message.channel.send(quest.bonusAttack());
         }
 
         /* checks whose currently online. command for developer*/
-        else if(msg.content === '!online'){
-            msg.channel.send(INIT_GAME.getOnline());
+        else if(command === 'online'){
+            message.channel.send(quest.getOnline());
             console.log(playersName);
         }
 
         /* The help command */
-        else if(msg.content === '!commands'){
-          msg.channel.send("Try !fight");
+        else if(command === 'commands'){
+          message.channel.send("Try h!fight");
         }
 
-        if(msg.content === '!test'){
-            msg.channel.send(msg.author);
+        if(command === 'test'){
+            message.channel.send(message.author);
 
-            console.log(msg.author);
+            console.log(message.author);
         }
     }
 });
