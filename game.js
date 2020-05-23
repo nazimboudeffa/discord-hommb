@@ -63,7 +63,7 @@ class Game {
         for(var x = 0; x < this.currentPlayer.length; x++){
             if(this.currentPlayer[x].playerName===currPlayer){
             if(this.currentPlayer[x].health <= 0){
-                return [`\nYou are dead. Type !newgame to refresh your stats!`];
+                return [`\nYou are dead. Type !new to refresh your stats!`];
             }
           }
         }
