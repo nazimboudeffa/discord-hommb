@@ -13,7 +13,7 @@ const Game = require('./game.js');
 
 //var token = CONFIG_TOKEN || process.env.TOKEN
 var token = process.env.TOKEN
-var port = 3000 || process.env.PORT
+var port = process.env.PORT || 3000
 
 // set the view engine to ejs
 app.set('view engine', 'ejs')
