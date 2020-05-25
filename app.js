@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/hero/:faction/:class', function (req, res) {
-  res.render('hero', { result : {"faction" : req.params.faction, "class" : req.params.class} })
+  res.render('hero')
 })
 
 app.listen(port, function () {
@@ -154,9 +154,9 @@ client.on('message', (message) => {
               color: 0x0099ff,
               title: 'Theodorus',
               url: 'https://hommb.herokuapp.com/hero/academy/battlemage',
-              description: 'Les Mages de Guerre sont les maîtres de la magie destructrice. clickez pour plus d\'infos',
+              description: 'Votre faction est Academy',
               thumbnail: {
-                url: 'https://hommb.herokuapp.com/assets/academy/heroes/academy-battlemage-theodorus.png',
+                url: 'https://hommb.herokuapp.com/assets/heroes/academy-battlemage-theodorus.png',
               },
               fields: [
                 {
@@ -168,12 +168,19 @@ client.on('message', (message) => {
                   value: '10',
                 },
                 {
-                  name: 'Field',
-                  value: '100',
+                  name: 'Golem',
+                  value: '50',
+                  inline: true
                 },
                 {
-                  name: 'Field',
-                  value: '100',
+                  name: 'Génie',
+                  value: '65',
+                  inline: true
+                },
+                {
+                  name: 'Apprenti',
+                  value: '104',
+                  inline: true
                 },
               ]
             };
