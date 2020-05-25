@@ -43,6 +43,7 @@ let userJoined = false;
 let inBattle = false;
 let session_id;
 let currentUser;
+let playChannel = "hommb-quest";
 
 /* User joins the server */
 client.on('message', (message) => {
@@ -51,6 +52,10 @@ client.on('message', (message) => {
 
     const args = message.content.slice(prefix.length).split('!');
     const command = args.shift().toLowerCase();
+
+    if(actualChannel != playChannel) {
+        message.channel.send(`${message.author} you cannot use a w! command here, please work in #${workChannel}`);
+    } else {
 
     if(command === 'join'){
 
@@ -89,7 +94,6 @@ client.on('message', (message) => {
             .setColor(0xFF0000)
             .addField(`${message.author.username} has Joined`, myRet);
             message.channel.send(embed);
-            message.channel.send(`${message.author} type h!commands to see the list of commands.`);
             return;
         }
 
@@ -108,6 +112,49 @@ client.on('message', (message) => {
         checkData();
         init();
     }
+
+    else if(command === 'commands'){
+
+        const exampleEmbed = {
+        	color: 0x0099ff,
+        	title: 'HoMMB Commands',
+        	url: 'https://hommb.herokuapp.com',
+        	author: {
+        		name: 'HoMMB',
+        		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
+        		url: 'https://hommb.herokuapp.com',
+        	},
+        	description: 'Somme commands to use to play Heroes in Discord',
+        	thumbnail: {
+        		url: 'https://i.imgur.com/XAoJ5vj.jpg',
+        	},
+        	fields: [
+            {
+              name: 'w!join faction',
+              value: 'Join the game with faction (optional)',
+            },
+        		{
+        			name: 'w!fight',
+        			value: 'To fight the monsters',
+        		},
+        		{
+        			name: 'w!stats',
+        			value: 'To see the stats',
+        		},
+        	],
+        	image: {
+        		url: 'https://i.imgur.com/XAoJ5vj.jpg',
+        	},
+        	timestamp: new Date(),
+        	footer: {
+        		text: 'Heroes of Might and Magic',
+        		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
+        	},
+        };
+
+        message.channel.send({ embed: exampleEmbed });
+
+      }
 
     /* User types the fight command */
     if(userJoined == true){
@@ -210,6 +257,7 @@ client.on('message', (message) => {
             console.log(message.author);
         }
     }
+  }
 });
 
 client.on('ready', () => {
