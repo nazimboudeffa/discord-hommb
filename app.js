@@ -25,6 +25,10 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
+app.get('/hero/:faction/:class', function (req, res) {
+  res.render('hero', { result : {"faction" : req.params.faction, "class" : req.params.class} })
+})
+
 app.listen(port, function () {
   console.log('HoMMB app listening on port 3000!')
 })
@@ -148,16 +152,11 @@ client.on('message', (message) => {
 
             const exampleEmbed = {
               color: 0x0099ff,
-              title: 'Name of the Hero',
-              url: 'https://hommb.herokuapp.com',
-              author: {
-                name: 'Work Bot',
-                icon_url: 'https://i.imgur.com/GoDjz2b.jpg',
-                url: 'https://hommb.herokuapp.com',
-              },
-              description: 'Somme commands to use to Work in Discord',
+              title: 'Theodorus',
+              url: 'https://hommb.herokuapp.com/hero/academy/battlemage',
+              description: 'Les Mages de Guerre sont les maîtres de la magie destructrice. clickez pour plus d\'infos',
               thumbnail: {
-                url: 'https://hommb.herokuapp.com/academy/heroes/academy-battlemage-theodorus.png',
+                url: 'https://hommb.herokuapp.com/assets/academy/heroes/academy-battlemage-theodorus.png',
               },
               fields: [
                 {
@@ -176,15 +175,7 @@ client.on('message', (message) => {
                   name: 'Field',
                   value: '100',
                 },
-              ],
-              image: {
-                url: 'https://i.imgur.com/GoDjz2b.jpg',
-              },
-              timestamp: new Date(),
-              footer: {
-                text: 'Heroes of Might and Magic',
-                icon_url: 'https://i.imgur.com/GoDjz2b.jpg',
-              },
+              ]
             };
 
             message.channel.send({ embed: exampleEmbed });
