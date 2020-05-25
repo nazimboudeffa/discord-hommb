@@ -56,7 +56,7 @@ client.on('message', (message) => {
     var actualChannel = message.channel.name
 
     if(actualChannel != playChannel) {
-        message.channel.send(`${message.author} you cannot use a w! command here, please work in #${workChannel}`);
+        message.channel.send(`${message.author} you cannot use a h! command here, please work in #${playChannel}`);
     } else {
 
     if(command === 'join'){
