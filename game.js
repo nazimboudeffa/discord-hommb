@@ -108,7 +108,7 @@ class Game {
     getStats(currPlayer){
       for(var x = 0; x < this.players.length; x++){
           if(this.players[x].name===currPlayer){
-              return this.players[x].health;
+              return this.players[x];
           }
       }
     }
