@@ -143,7 +143,51 @@ client.on('message', (message) => {
         else if(command === 'stats'){
             currentUser = message.author.username;
             let grabCurrPlayer = currentUser;
-            message.channel.send(quest.getStats(currentUser));
+            //message.channel.send(quest.getStats(currentUser));
+            let health = quest.getStats(currentUser);
+
+            const exampleEmbed = {
+              color: 0x0099ff,
+              title: 'Name of the Hero',
+              url: 'https://hommb.herokuapp.com',
+              author: {
+                name: 'Work Bot',
+                icon_url: 'https://i.imgur.com/GoDjz2b.jpg',
+                url: 'https://hommb.herokuapp.com',
+              },
+              description: 'Somme commands to use to Work in Discord',
+              thumbnail: {
+                url: 'https://hommb.herokuapp.com/academy/heroes/academy-battlemage-theodorus.png',
+              },
+              fields: [
+                {
+                  name: 'Health',
+                  value: health,
+                },
+                {
+                  name: 'Mana',
+                  value: '10',
+                },
+                {
+                  name: 'Field',
+                  value: '100',
+                },
+                {
+                  name: 'Field',
+                  value: '100',
+                },
+              ],
+              image: {
+                url: 'https://i.imgur.com/GoDjz2b.jpg',
+              },
+              timestamp: new Date(),
+              footer: {
+                text: 'Heroes of Might and Magic',
+                icon_url: 'https://i.imgur.com/GoDjz2b.jpg',
+              },
+            };
+
+            message.channel.send({ embed: exampleEmbed });
         }
 
         /* Simply checks the bonus damage. command for developer*/
