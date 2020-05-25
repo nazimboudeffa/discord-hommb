@@ -53,6 +53,8 @@ client.on('message', (message) => {
     const args = message.content.slice(prefix.length).split('!');
     const command = args.shift().toLowerCase();
 
+    var actualChannel = message.channel.name
+
     if(actualChannel != playChannel) {
         message.channel.send(`${message.author} you cannot use a w! command here, please work in #${workChannel}`);
     } else {
@@ -130,15 +132,15 @@ client.on('message', (message) => {
         	},
         	fields: [
             {
-              name: 'w!join faction',
+              name: 'h!join faction',
               value: 'Join the game with faction (optional)',
             },
         		{
-        			name: 'w!fight',
+        			name: 'h!fight',
         			value: 'To fight the monsters',
         		},
         		{
-        			name: 'w!stats',
+        			name: 'h!stats',
         			value: 'To see the stats',
         		},
         	],
