@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-//const { CONFIG_TOKEN } = require('./config.json');
+const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./data.json');
 
 const client = new Discord.Client();
@@ -10,9 +10,10 @@ const ejs = require('ejs')
 const path = require('path')
 
 const Game = require('./game.js');
+const Player = require('./player.js');
 
-//var token = CONFIG_TOKEN || process.env.TOKEN
-var token = process.env.TOKEN
+var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
@@ -35,9 +36,9 @@ app.listen(port, function () {
 
 const prefix = 'h!';
 
-let playersName = []; // tracks each player that joins
+let players = []; // tracks each player that joins
 let playersSaveFile = [];
-let currPlayers = 0; //tracker for total players online
+let playersOnline = 0; //tracker for total players online
 let quest; //Initilizes our game engine
 let userJoined = false;
 let inBattle = false;
@@ -62,24 +63,24 @@ client.on('message', (message) => {
     if(command === 'join'){
 
         // Prevents multiple instances of the same person from joining
-        for(var x = 0; x < playersName.length; x++){
-            if(playersName[x].playerName===message.author.username){
-                return playersName[x].playerName;
+        for(var x = 0; x < players.length; x++){
+            if(players[x].name===message.author.username){
+                return players[x].name;
             }
          }
 
         function checkData(){
         // Checks the object that stores players data so they can retrieve their saved progress
         for(var s = 0; s < playersSaveFile.length; s++){
-            if(playersSaveFile[s].playerName===message.author.username){
-                for(var y = 0; y < playersName.length; y++){
+            if(playersSaveFile[s].name===message.author.username){
+                for(var y = 0; y < players.length; y++){
                 /* If the name in the save file object matches the name of the current user online, retrieve
                 that specific persons saved progress */
-                if(playersName[y].playerName===playersSaveFile[s].playerName){
+                if(players[y].name===playersSaveFile[s].name){
                 message.channel.send('This player has a saved file!');
                 /* Grab the index from the saved file and set it to the index of the current players object
                 This is where you load all the players progress(such as health,damage,id,etc) */
-                playersName[y].index=playersSaveFile[s].index;
+                players[y].index=playersSaveFile[s].index;
                 message.channel.send('Saved file has been loaded.');
                 } else{
                    }
@@ -89,7 +90,7 @@ client.on('message', (message) => {
         }
 
         function init(){
-            quest = new Game(playersName, client, 'hommb-quest', currPlayers);
+            quest = new Game(players, client, 'hommb-quest', playersOnline);
             let myRet = quest.startGame();
             const embed = new Discord.MessageEmbed()
             .setTitle("Welcome to Heroes of Might and Magic")
@@ -100,17 +101,19 @@ client.on('message', (message) => {
         }
 
         // Increasing the players online count when someone joins
-        currPlayers++;
+        playersOnline++;
         userJoined = true;
 
         // Creates a new object to store information about the player who joined
-        playersName.push({
-            "playerName": message.author.username,
+        /*
+        players.push({
+            "name": message.author.username,
             "index": 99,
             "health": 150,
             "inBattle": false
         });
-
+        */
+        players.push(new Player(message.author.username));
         checkData();
         init();
     }
@@ -161,8 +164,8 @@ client.on('message', (message) => {
     /* User types the fight command */
     if(userJoined == true){
         if(command === 'fight'){
-            for(var d = 0; d < playersName.length; d++){
-                session_id = playersName[d];
+            for(var d = 0; d < players.length; d++){
+                session_id = players[d];
             }
 
             console.log("You attacked monster.");
@@ -175,9 +178,9 @@ client.on('message', (message) => {
         else if(command === 'leave'){
             let tempLeave = message.author.username;
 
-            for(var x = 0; x < playersName.length; x++){
-                if(playersName[x].playerName === tempLeave){
-                    playersName.splice(x, 1);
+            for(var x = 0; x < players.length; x++){
+                if(players[x].name === tempLeave){
+                    players.splice(x, 1);
                     currPlayers--;
                 }
             }
@@ -197,7 +200,7 @@ client.on('message', (message) => {
             currentUser = message.author.username;
             let grabCurrPlayer = currentUser;
             //message.channel.send(quest.getStats(currentUser));
-            let health = quest.getStats(currentUser);
+            let player = quest.getStats(currentUser);
 
             const exampleEmbed = {
               color: 0x0099ff,
@@ -210,11 +213,11 @@ client.on('message', (message) => {
               fields: [
                 {
                   name: 'Health',
-                  value: health,
+                  value: player.health,
                 },
                 {
                   name: 'Mana',
-                  value: '10',
+                  value: player.mana,
                 },
                 {
                   name: 'Golem',
@@ -245,12 +248,7 @@ client.on('message', (message) => {
         /* checks whose currently online. command for developer*/
         else if(command === 'online'){
             message.channel.send(quest.getOnline());
-            console.log(playersName);
-        }
-
-        /* The help command */
-        else if(command === 'commands'){
-          message.channel.send("Try h!fight");
+            console.log(players);
         }
 
         if(command === 'test'){

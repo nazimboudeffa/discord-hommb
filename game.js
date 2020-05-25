@@ -1,8 +1,8 @@
 class Game {
-    constructor(player, client, channelName='hommb-test', playersOnline){
+    constructor(players, client, playChannel='hommb-test', playersOnline){
          this.client = client;
-         this.channelName = channelName;
-         this.currentPlayer = player;
+         this.channelName = playChannel;
+         this.players = players;
          this.playersOnline = [];
          this.hitpoints = 120;
          this.damage = '';
@@ -23,9 +23,9 @@ class Game {
 
     /* main menu information, players online */
     startGame(){
-            for(var x = 0; x < this.currentPlayer.length; x++){
-                this.playersOnline.push(this.currentPlayer[x]);
-                if(this.playersOnline[x] === this.currentPlayer[x]){
+            for(var x = 0; x < this.players.length; x++){
+                this.playersOnline.push(this.players[x]);
+                if(this.playersOnline[x] === this.players[x]){
                     return [`Players Online: ${this.online}\n`];
             }
          }
@@ -47,9 +47,9 @@ class Game {
             }
             this.monster[0].hp -= playerDamage;
 
-            for(var x = 0; x < this.currentPlayer.length; x++){
-                if(this.currentPlayer[x].playerName===currPlayer){
-                    this.currentPlayer[x].health -= this.monster[0].damage;
+            for(var x = 0; x < this.players.length; x++){
+                if(this.players[x].playerName===currPlayer){
+                    this.players[x].health -= this.monster[0].damage;
                 }
             }
 
@@ -64,21 +64,21 @@ class Game {
             totalBonusDamage = playerDamage + this.bonusAttack();
         }
 
-        for(var x = 0; x < this.currentPlayer.length; x++){
-            if(this.currentPlayer[x].playerName===currPlayer){
-            if(this.currentPlayer[x].health <= 0){
+        for(var x = 0; x < this.players.length; x++){
+            if(this.players[x].playerName===currPlayer){
+            if(this.players[x].health <= 0){
                 return [`\nYou are dead. Type h!new to refresh your stats!`];
             }
           }
         }
 
         if(this.monster[0].hp <= 0){
-            for(var x = 0; x < this.currentPlayer.length; x++){
-                if(this.currentPlayer[x].playerName===currPlayer){
+            for(var x = 0; x < this.players.length; x++){
+                if(this.players[x].playerName===currPlayer){
                     let maxDamage = totalDamage + totalBonusDamage;
                     this.monster[0].hp = Math.floor(Math.random() * 50);
                     return [`${currPlayer} has attacked ${numberOfAttacks} times dealing ${totalDamage} + (${totalBonusDamage}) bonus damage for a total of ${maxDamage} damage. The monster is dead.\n
-                    Your Health: ${this.currentPlayer[x].health}`];
+                    Your Health: ${this.players[x].health}`];
                 }
             }
         }
@@ -97,8 +97,8 @@ class Game {
     getOnline(){
         let totalPlayers = [];
 
-        for(var x = 0; x < this.currentPlayer.length; x++){
-          totalPlayers.push([`ID: [${this.currentPlayer[x].index}] [${this.currentPlayer[x].playerName}]`]);
+        for(var x = 0; x < this.players.length; x++){
+          totalPlayers.push([`ID: [${this.players[x].index}] [${this.players[x].playerName}]`]);
         }
         console.log(totalPlayers);
         return totalPlayers;
@@ -106,20 +106,20 @@ class Game {
 
     /* displays players currently online */
     getStats(currPlayer){
-      for(var x = 0; x < this.currentPlayer.length; x++){
-          if(this.currentPlayer[x].playerName===currPlayer){
-              return this.currentPlayer[x].health;
+      for(var x = 0; x < this.players.length; x++){
+          if(this.players[x].name===currPlayer){
+              return this.players[x];
           }
       }
     }
 
     /* refresh stats */
     newGame(currPlayer){
-        for(var x = 0; x < this.currentPlayer.length; x++){
-            if(this.currentPlayer[x].playerName===currPlayer){
-            if(this.currentPlayer[x].health <= 0){
+        for(var x = 0; x < this.players.length; x++){
+            if(this.players[x].playerName===currPlayer){
+            if(this.players[x].health <= 0){
                 //this.monster[0].hp = Math.floor(Math.random() * 50);
-                this.currentPlayer[x].health = 150;
+                this.players[x].health = 150;
             }
           }
         }
