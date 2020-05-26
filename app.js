@@ -135,13 +135,13 @@ client.on('message', (message) => {
         		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
         		url: 'https://hommb.herokuapp.com',
         	},
-        	description: 'Somme commands to use to play Heroes in Discord',
+        	description: 'Some commands to use to play Heroes in Discord',
         	thumbnail: {
         		url: 'https://i.imgur.com/XAoJ5vj.jpg',
         	},
         	fields: [
             {
-              name: 'h!join faction',
+              name: 'h!join or h!leave',
               value: 'Join the game with faction (optional)',
             },
         		{
