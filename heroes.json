@@ -5,24 +5,28 @@
       "hero" : "edric",
       "faction" : "haven",
       "classe" : "might",
+      "gender" : "male",
       "speciality" : "vindicator"
     },
     {
       "hero" : "sergei",
       "faction" : "haven",
       "classe" : "might",
+      "gender" : "male",
       "speciality" : "vindicator"
     },
     {
       "hero" : "krystoff",
       "faction" : "haven",
       "classe" : "magic",
+      "gender" : "male",
       "speciality" : "inquisitor"
     },
     {
       "hero" : "wilhelm",
       "faction" : "haven",
       "classe" : "magic",
+      "gender" : "male",
       "speciality" : "inquisitor"
     }
   ],
@@ -32,24 +36,28 @@
       "hero" : "asad",
       "faction" : "academy",
       "classe" : "might",
+      "gender" : "male",
       "speciality" : "blademage"
     },
     {
       "hero" : "gloria",
       "faction" : "academy",
       "classe" : "might",
+      "gender" : "female",
       "speciality" : "blademage"
     },
     {
       "hero" : "johari",
       "faction" : "academy",
       "classe" : "magic",
+      "gender" : "female",
       "speciality" : "battlemage"
     },
     {
       "hero" : "theodorus",
       "faction" : "academy",
       "classe" : "magic",
+      "gender" : "male",
       "speciality" : "battlemage"
     }
   ]
