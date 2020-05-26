@@ -26,8 +26,8 @@ app.get('/', function (req, res) {
   res.render('index')
 })
 
-app.get('/hero/:faction/:class', function (req, res) {
-  res.render('hero')
+app.get('/hero/:faction/:classe', function (req, res) {
+  res.render('hero', { hero : { "faction" : req.params.faction, "classe" : req.params.classe }})
 })
 
 app.listen(port, function () {
@@ -45,6 +45,8 @@ let inBattle = false;
 let session_id;
 let currentUser;
 let playChannel = "hommb-quest";
+let faction;
+let classe;
 
 /* User joins the server */
 client.on('message', (message) => {
@@ -113,7 +115,10 @@ client.on('message', (message) => {
             "inBattle": false
         });
         */
-        players.push(new Player(message.author.username));
+        player = new Player(message.author.username)
+        faction = player.faction;
+        classe = player.classe;
+        players.push(player);
         checkData();
         init();
     }
@@ -181,7 +186,7 @@ client.on('message', (message) => {
             for(var x = 0; x < players.length; x++){
                 if(players[x].name === tempLeave){
                     players.splice(x, 1);
-                    currPlayers--;
+                    players--;
                 }
             }
             message.channel.send([`${tempLeave} has left the quest.`]);
