@@ -16,7 +16,28 @@
       "speciality" : "vindicator"
     },
     {
-      "hero" : "krystoff",
+      "hero" : "melisande",
+      "faction" : "haven",
+      "classe" : "might",
+      "gender" : "female",
+      "speciality" : "knight"
+    },
+    {
+      "hero" : "yiris",
+      "faction" : "haven",
+      "classe" : "might",
+      "gender" : "female",
+      "speciality" : "paladin"
+    },
+    {
+      "hero" : "ymoril",
+      "faction" : "haven",
+      "classe" : "might",
+      "gender" : "female",
+      "speciality" : "paladin"
+    },
+    {
+      "hero" : "kryztoff",
       "faction" : "haven",
       "classe" : "magic",
       "gender" : "male",
@@ -28,6 +49,27 @@
       "classe" : "magic",
       "gender" : "male",
       "speciality" : "inquisitor"
+    },
+    {
+      "hero" : "amilcar",
+      "faction" : "haven",
+      "classe" : "magic",
+      "gender" : "male",
+      "speciality" : "cleric"
+    },
+    {
+      "hero" : "ella",
+      "faction" : "haven",
+      "classe" : "magic",
+      "gender" : "female",
+      "speciality" : "cleric"
+    },
+    {
+      "hero" : "orna",
+      "faction" : "haven",
+      "classe" : "magic",
+      "gender" : "female",
+      "speciality" : "confessor"
     }
   ],
   "academy" :
@@ -47,6 +89,20 @@
       "speciality" : "blademage"
     },
     {
+      "hero" : "aali",
+      "faction" : "academy",
+      "classe" : "might",
+      "gender" : "female",
+      "speciality" : "alchemist"
+    },
+    {
+      "hero" : "masfar",
+      "faction" : "academy",
+      "classe" : "might",
+      "gender" : "male",
+      "speciality" : "alchemist"
+    },
+    {
       "hero" : "johari",
       "faction" : "academy",
       "classe" : "magic",
@@ -59,6 +115,27 @@
       "classe" : "magic",
       "gender" : "male",
       "speciality" : "battlemage"
+    },
+    {
+      "hero" : "minsali",
+      "faction" : "academy",
+      "classe" : "magic",
+      "gender" : "female",
+      "speciality" : "wizard"
+    },
+    {
+      "hero" : "yasir",
+      "faction" : "academy",
+      "classe" : "magic",
+      "gender" : "male",
+      "speciality" : "wizard"
+    },
+    {
+      "hero" : "mirym",
+      "faction" : "academy",
+      "classe" : "magic",
+      "gender" : "male",
+      "speciality" : "enchanter"
     }
   ]
 }

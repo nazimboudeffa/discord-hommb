@@ -47,6 +47,7 @@ let currentUser;
 let playChannel = "hommb-quest";
 let faction;
 let classe;
+let gender;
 
 /* User joins the server */
 client.on('message', (message) => {
@@ -118,6 +119,7 @@ client.on('message', (message) => {
         let player = new Player(message.author.username)
         faction = player.faction;
         classe = player.classe;
+        gender = player.gender;
         console.log(player);
         players.push(player);
         checkData();

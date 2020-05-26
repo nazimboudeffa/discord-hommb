@@ -10,6 +10,7 @@ class Player {
       this.faction = faction;
       this.classe = hero.classe;
       this.hero = hero.hero;
+      this.gender = hero.gender;
       this.profile = 'https://hommb.herokuapp.com/hero/'+hero.faction+'/'+hero.classe;
       this.thumbnail = 'https://hommb.herokuapp.com/assets/heroes/'+hero.faction+'-'+hero.speciality+'-'+hero.hero+'.png';
       this.health = 150;
