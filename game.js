@@ -9,11 +9,6 @@ class Game {
          this.chance = 3;
          this.inBattle = false;
          this.online = playersOnline;
-
-         this.faction = "academy";
-         this.class = "magic";
-         this.mana = '10';
-
          this.monster = [{
              hp: Math.floor(Math.random() * 200),
              temphp: 0,

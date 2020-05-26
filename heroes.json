@@ -1,0 +1,56 @@
+{
+  "haven" :
+  [
+    {
+      "hero" : "edric",
+      "faction" : "haven",
+      "classe" : "might",
+      "speciality" : "vindicator"
+    },
+    {
+      "hero" : "sergei",
+      "faction" : "haven",
+      "classe" : "might",
+      "speciality" : "vindicator"
+    },
+    {
+      "hero" : "krystoff",
+      "faction" : "haven",
+      "classe" : "magic",
+      "speciality" : "inquisitor"
+    },
+    {
+      "hero" : "wilhelm",
+      "faction" : "haven",
+      "classe" : "magic",
+      "speciality" : "inquisitor"
+    }
+  ],
+  "academy" :
+  [
+    {
+      "hero" : "asad",
+      "faction" : "academy",
+      "classe" : "might",
+      "speciality" : "blademage"
+    },
+    {
+      "hero" : "gloria",
+      "faction" : "academy",
+      "classe" : "might",
+      "speciality" : "blademage"
+    },
+    {
+      "hero" : "johari",
+      "faction" : "academy",
+      "classe" : "magic",
+      "speciality" : "battlemage"
+    },
+    {
+      "hero" : "theodorus",
+      "faction" : "academy",
+      "classe" : "magic",
+      "speciality" : "battlemage"
+    }
+  ]
+}

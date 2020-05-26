@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-//const { CONFIG_TOKEN } = require('./config.json');
+const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./data.json');
 
 const client = new Discord.Client();
@@ -12,8 +12,8 @@ const path = require('path')
 const Game = require('./game.js');
 const Player = require('./player.js');
 
-//var token = CONFIG_TOKEN || process.env.TOKEN
-var token = process.env.TOKEN
+var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
@@ -204,11 +204,11 @@ client.on('message', (message) => {
 
             const exampleEmbed = {
               color: 0x0099ff,
-              title: 'Theodorus',
-              url: 'https://hommb.herokuapp.com/hero/academy/battlemage',
-              description: 'Votre faction est Academy',
+              title: player.hero,
+              url: player.profile,
+              description: 'Votre faction est ' + player.faction,
               thumbnail: {
-                url: 'https://hommb.herokuapp.com/assets/heroes/academy-battlemage-theodorus.png',
+                url: player.thumbnail,
               },
               fields: [
                 {
@@ -222,17 +222,17 @@ client.on('message', (message) => {
                 {
                   name: 'Golem',
                   value: '50',
-                  inline: true
+                  inline: true,
                 },
                 {
                   name: 'Génie',
                   value: '65',
-                  inline: true
+                  inline: true,
                 },
                 {
                   name: 'Apprenti',
                   value: '104',
-                  inline: true
+                  inline: true,
                 },
               ]
             };
