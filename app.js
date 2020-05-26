@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/hero/:faction/:classe', function (req, res) {
-  res.render('hero', { hero : { "faction" : req.params.faction, "classe" : req.params.classe }})
+  res.render('hero', { hero : { "faction" : req.params.faction, "classe" : req.params.classe, "gender" : gender }})
 })
 
 app.listen(port, function () {
