@@ -115,9 +115,10 @@ client.on('message', (message) => {
             "inBattle": false
         });
         */
-        player = new Player(message.author.username)
+        let player = new Player(message.author.username)
         faction = player.faction;
         classe = player.classe;
+        console.log(player);
         players.push(player);
         checkData();
         init();
@@ -186,7 +187,6 @@ client.on('message', (message) => {
             for(var x = 0; x < players.length; x++){
                 if(players[x].name === tempLeave){
                     players.splice(x, 1);
-                    players--;
                 }
             }
             message.channel.send([`${tempLeave} has left the quest.`]);
