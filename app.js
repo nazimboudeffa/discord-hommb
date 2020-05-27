@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-//const { CONFIG_TOKEN } = require('./config.json');
+const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./quest/data.json');
 
 const client = new Discord.Client();
@@ -12,8 +12,8 @@ const path = require('path')
 const Game = require('./quest/game.js');
 const Player = require('./quest/player.js');
 
-//var token = CONFIG_TOKEN || process.env.TOKEN
-var token = process.env.TOKEN
+var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
@@ -27,7 +27,12 @@ app.get('/', function (req, res) {
 })
 
 app.get('/hero/:faction/:classe', function (req, res) {
-  res.render('hero', { hero : { "faction" : req.params.faction, "classe" : req.params.classe, "gender" : gender }})
+  let g = (player == undefined) ? "male" : player.gender
+  res.render('hero', { hero : { "faction" : req.params.faction, "classe" : req.params.classe, "gender" : g }})
+})
+
+app.get('/:faction', function (req, res) {
+  res.render('faction', { faction : req.params.faction })
 })
 
 app.listen(port, function () {
@@ -45,9 +50,7 @@ let inBattle = false;
 let session_id;
 let currentUser;
 let playChannel = "hommb-quest";
-let faction;
-let classe;
-let gender;
+let player;
 
 /* User joins the server */
 client.on('message', (message) => {
@@ -116,10 +119,7 @@ client.on('message', (message) => {
             "inBattle": false
         });
         */
-        let player = new Player(message.author.username)
-        faction = player.faction;
-        classe = player.classe;
-        gender = player.gender;
+        player = new Player(message.author.username)
         console.log(player);
         players.push(player);
         checkData();

@@ -1,12 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
     <meta charset="utf-8">
     <title>Hero</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
   </head>
   <body>
-    <h1>Faction <%=hero.faction%></h1>
-    <p>Classe de <%=hero.classe%></p>
-    <img src="/assets/heroes/PIC_hero_artwork_<%=hero.faction%>_<%=hero.gender == "" ? "male" : hero.gender%>_<%=hero.classe%>_small.jpg" alt="">
+    <style>
+
+      body{
+          background-color:  #1c1b1a;
+          font-family: "Raleway", sans-serif
+      }
+
+      .card {
+        position: relative;
+        margin-top:50px;
+      }
+
+      .container{
+          display: block;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .card {
+        width: 333px;
+        height: 444px;
+        background-color: #000;
+        position: relative;
+        text-align:center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+    </style>
+    <div class="w3-text-white">
+      <div class="w3-display-topleft w3-padding-large w3-xlarge">
+        <a href="/" style="text-decoration : none">Heroes of Might and Magic Discord RPG Bot</a>
+      </div>
+      <div class="conatainer">
+        <div class="card">
+          <img class="card__image" src="/assets/heroes/PIC_hero_artwork_<%=hero.faction%>_<%=hero.gender%>_<%=hero.classe%>_small.jpg" alt="">
+          <h2>Faction <a href="/<%=hero.faction%>"><%=hero.faction%></a></h2>
+          <p>Classe de <%=hero.classe%></p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
