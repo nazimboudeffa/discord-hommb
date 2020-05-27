@@ -1,4 +1,4 @@
-const Monster = require('./quest/monster.js');
+const Monster = require('./monster.js');
 
 class Game {
     constructor(players, client, playChannel='hommb-test', playersOnline){

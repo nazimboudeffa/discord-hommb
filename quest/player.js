@@ -1,4 +1,4 @@
-const heroes = require('./quest/heroes.json');
+const heroes = require('./heroes.json');
 
 class Player {
     constructor(name){
