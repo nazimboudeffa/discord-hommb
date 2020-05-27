@@ -152,7 +152,7 @@ client.on('message', (message) => {
         		},
         		{
         			name: 'Statistics',
-        			value: '`h!stats` `h!units` ~~`h!spells`~~ ~~`h!artifacts`~~',
+        			value: '`h!stats` ~~`h!spellbook`~~ ~~`h!artifacts`~~',
         		},
         	],
         	image: {
@@ -231,28 +231,7 @@ client.on('message', (message) => {
                 {
                   name: 'Health',
                   value: player.health,
-                }
-              ]
-            };
-
-            message.channel.send({ embed: exampleEmbed });
-        }
-
-        else if(command === 'units'){
-            currentUser = message.author.username;
-            let grabCurrPlayer = currentUser;
-            //message.channel.send(quest.getStats(currentUser));
-            let player = quest.getUnits(currentUser);
-
-            const exampleEmbed = {
-              color: 0x0099ff,
-              title: player.hero,
-              url: player.profile,
-              description: 'Votre faction est ' + player.faction,
-              thumbnail: {
-                url: player.thumbnail,
-              },
-              fields: [
+                },
                 {
                   name: player.units[0].unit,
                   value: player.units[0].life,
