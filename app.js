@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const { CONFIG_TOKEN } = require('./config.json');
+//const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./quest/data.json');
 
 const client = new Discord.Client();
@@ -12,8 +12,8 @@ const path = require('path')
 const Game = require('./quest/game.js');
 const Player = require('./quest/player.js');
 
-var token = CONFIG_TOKEN || process.env.TOKEN
-//var token = process.env.TOKEN
+//var token = CONFIG_TOKEN || process.env.TOKEN
+var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
