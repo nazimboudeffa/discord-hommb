@@ -132,23 +132,15 @@ client.on('message', (message) => {
         	color: 0x0099ff,
         	title: 'HoMMB Commands',
         	url: 'https://hommb.herokuapp.com',
-        	author: {
-        		name: 'HoMMB',
-        		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
-        		url: 'https://hommb.herokuapp.com',
-        	},
         	description: 'Some commands to use to play Heroes in Discord',
-        	thumbnail: {
-        		url: 'https://i.imgur.com/XAoJ5vj.jpg',
-        	},
         	fields: [
             {
-              name: 'Start Game',
-              value: '`h!join` `h!leave`',
+              name: 'Playing the Game',
+              value: '`h!join` `h!new` `h!leave`',
             },
         		{
         			name: 'Battles',
-        			value: '`h!fight`',
+        			value: '`h!fight` ~~`h!spell`~~',
         		},
         		{
         			name: 'Statistics',
@@ -158,17 +150,54 @@ client.on('message', (message) => {
         	image: {
         		url: 'https://i.imgur.com/XAoJ5vj.jpg',
         	},
-        	timestamp: new Date(),
-        	footer: {
-        		text: 'Heroes of Might and Magic',
-        		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
-        	},
         };
 
         message.channel.send({ embed: exampleEmbed });
 
       }
 
+      else if(command === 'test'){
+
+          const exampleEmbed = {
+          	color: 0x0099ff,
+          	title: 'HoMMB Test',
+          	url: 'https://hommb.herokuapp.com',
+          	author: {
+          		name: 'HoMMB',
+          		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
+          		url: 'https://hommb.herokuapp.com',
+          	},
+          	description: 'Lorem ipsum',
+          	thumbnail: {
+          		url: 'https://i.imgur.com/XAoJ5vj.jpg',
+          	},
+          	fields: [
+              {
+                name: 'Start Game',
+                value: '`h!join` `h!leave`',
+              },
+          		{
+          			name: 'Battles',
+          			value: '`h!fight`',
+          		},
+          		{
+          			name: 'Statistics',
+          			value: '`h!stats` ~~`h!spellbook`~~ ~~`h!artifacts`~~',
+          		},
+          	],
+          	image: {
+          		url: 'https://i.imgur.com/XAoJ5vj.jpg',
+          	},
+          	timestamp: new Date(),
+          	footer: {
+          		text: 'Heroes of Might and Magic',
+          		icon_url: 'https://i.imgur.com/XAoJ5vj.jpg',
+          	},
+          };
+
+          message.channel.send({ embed: exampleEmbed });
+
+        }
     /* User types the fight command */
     if(userJoined == true){
         if(command === 'fight'){
