@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
-//const { CONFIG_TOKEN } = require('./config.json');
-const { greetings } = require('./data.json');
+const { CONFIG_TOKEN } = require('./config.json');
+const { greetings } = require('./quest/data.json');
 
 const client = new Discord.Client();
 const express = require('express')
@@ -9,11 +9,11 @@ const app = express()
 const ejs = require('ejs')
 const path = require('path')
 
-const Game = require('./game.js');
-const Player = require('./player.js');
+const Game = require('./quest/game.js');
+const Player = require('./quest/player.js');
 
-//var token = CONFIG_TOKEN || process.env.TOKEN
-var token = process.env.TOKEN
+var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
@@ -143,16 +143,16 @@ client.on('message', (message) => {
         	},
         	fields: [
             {
-              name: 'h!join or h!leave',
-              value: 'Join the game with faction (optional)',
+              name: 'Start Game',
+              value: '`h!join` `h!leave`',
             },
         		{
-        			name: 'h!fight',
-        			value: 'To fight the monsters',
+        			name: 'Battles',
+        			value: '`h!fight`',
         		},
         		{
-        			name: 'h!stats',
-        			value: 'To see the stats',
+        			name: 'Statistics',
+        			value: '`h!stats` `h!units` ~~`h!spells`~~ ~~`h!artifacts`~~',
         		},
         	],
         	image: {
@@ -219,26 +219,53 @@ client.on('message', (message) => {
               },
               fields: [
                 {
-                  name: 'Health',
-                  value: player.health,
+                  name: 'Movement',
+                  value: player.movement,
+                  inline: true,
                 },
                 {
                   name: 'Mana',
                   value: player.mana,
-                },
-                {
-                  name: 'Golem',
-                  value: '50',
                   inline: true,
                 },
                 {
-                  name: 'Génie',
-                  value: '65',
+                  name: 'Health',
+                  value: player.health,
+                }
+              ]
+            };
+
+            message.channel.send({ embed: exampleEmbed });
+        }
+
+        else if(command === 'units'){
+            currentUser = message.author.username;
+            let grabCurrPlayer = currentUser;
+            //message.channel.send(quest.getStats(currentUser));
+            let player = quest.getUnits(currentUser);
+
+            const exampleEmbed = {
+              color: 0x0099ff,
+              title: player.hero,
+              url: player.profile,
+              description: 'Votre faction est ' + player.faction,
+              thumbnail: {
+                url: player.thumbnail,
+              },
+              fields: [
+                {
+                  name: player.units[0].unit,
+                  value: player.units[0].life,
                   inline: true,
                 },
                 {
-                  name: 'Apprenti',
-                  value: '104',
+                  name: player.units[1].unit,
+                  value: player.units[1].life,
+                  inline: true,
+                },
+                {
+                  name: player.units[2].unit,
+                  value: player.units[2].life,
                   inline: true,
                 },
               ]

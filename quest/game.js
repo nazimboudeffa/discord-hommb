@@ -1,4 +1,4 @@
-const Monster = require('./quest/Monster.js');
+const Monster = require('./Monster.js');
 
 class Game {
     constructor(players, client, playChannel='hommb-test', playersOnline){
@@ -6,6 +6,9 @@ class Game {
          this.channelName = playChannel;
          this.players = players;
          this.playersOnline = [];
+         this.hitpoints = 120;
+         this.damage = '';
+         this.chance = 3;
          this.inBattle = false;
          this.online = playersOnline;
          this.monsters = [new Monster()];
