@@ -1,4 +1,4 @@
-const heroes = require('./heroes.json');
+const heroes = require('./quest/heroes.json');
 
 class Player {
     constructor(name){
@@ -17,6 +17,9 @@ class Player {
       this.movement = 27;
       this.mana = 10;
       this.inBattle = false;
+      this.hitpoints = 120;
+      this.damage = '';
+      this.chance = 3;
       this.units = [
         {
           "unit" : "Cabir",
