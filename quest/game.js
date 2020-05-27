@@ -108,7 +108,7 @@ class Game {
         for(var x = 0; x < this.players.length; x++){
             if(this.players[x].name===currPlayer){
             if(this.players[x].health <= 0){
-                //this.monsters[0].hp = Math.floor(Math.random() * 50);
+                this.monsters[0].hp = Math.floor(Math.random() * 50);
                 this.players[x].health = 150;
             }
           }
