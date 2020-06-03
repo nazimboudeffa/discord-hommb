@@ -1,9 +1,17 @@
 const heroes = require('./heroes.json');
 
 class Player {
-    constructor(name){
-      let factions = ['haven', 'academy']//,'necropolis','stronghold','sylvan','dungeon','fortress'];
-      let faction = factions[Math.floor(Math.random() * factions.length)];
+    constructor(name, faction){
+      /*
+      let factions = ['haven', 'academy','necropolis','stronghold','sylvan','dungeon','fortress'];
+      let faction = f;
+      if (!f== 'haven' || !f == 'academy' || f=='') {
+        faction = factions[Math.floor(Math.random() * factions.length)];
+      }
+      else {
+        faction = f;
+      }
+      */
       let hero = heroes[faction][Math.floor(Math.random() * heroes[faction].length)];
       this.index = 99;
       this.name = name;

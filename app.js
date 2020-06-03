@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-//const { CONFIG_TOKEN } = require('./config.json');
+const { CONFIG_TOKEN } = require('./config.json');
 const { greetings } = require('./quest/data.json');
 
 const client = new Discord.Client();
@@ -12,8 +12,8 @@ const path = require('path')
 const Game = require('./quest/game.js');
 const Player = require('./quest/player.js');
 
-//var token = CONFIG_TOKEN || process.env.TOKEN
-var token = process.env.TOKEN
+var token = CONFIG_TOKEN || process.env.TOKEN
+//var token = process.env.TOKEN
 var port = process.env.PORT || 3000
 
 // set the view engine to ejs
@@ -57,7 +57,7 @@ client.on('message', (message) => {
 
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).split('!');
+    const args = message.content.slice(prefix.length).split(' ');
     const command = args.shift().toLowerCase();
 
     var actualChannel = message.channel.name
@@ -68,16 +68,16 @@ client.on('message', (message) => {
 
     if(command === 'join'){
 
-        // Prevents multiple instances of the same person from joining
-        for(var x = 0; x < players.length; x++){
-            if(players[x].name===message.author.username){
-                return players[x].name;
-            }
-         }
+      // Prevents multiple instances of the same person from joining
+      for(var x = 0; x < players.length; x++){
+        if(players[x].name===message.author.username){
+          return message.channel.send(`You have already joined, ${message.author}`);
+        }
+      }
 
         function checkData(){
-        // Checks the object that stores players data so they can retrieve their saved progress
-        for(var s = 0; s < playersSaveFile.length; s++){
+          // Checks the object that stores players data so they can retrieve their saved progress
+          for(var s = 0; s < playersSaveFile.length; s++){
             if(playersSaveFile[s].name===message.author.username){
                 for(var y = 0; y < players.length; y++){
                 /* If the name in the save file object matches the name of the current user online, retrieve
@@ -101,29 +101,34 @@ client.on('message', (message) => {
             const embed = new Discord.MessageEmbed()
             .setTitle("Welcome to Heroes of Might and Magic")
             .setColor(0xFF0000)
-            .addField(`${message.author.username} has Joined`, myRet);
+            .addField(`${message.author.username} has Joined ${args[0]}`, myRet);
             message.channel.send(embed);
             return;
         }
 
-        // Increasing the players online count when someone joins
-        playersOnline++;
-        userJoined = true;
+        if (!args.length) {
+      		return message.channel.send(`Type : h!join haven or academy, necropolis, stronghold, sylvan, dungeon, fortress", ${message.author}`);
+      	} else {
 
-        // Creates a new object to store information about the player who joined
-        /*
-        players.push({
-            "name": message.author.username,
-            "index": 99,
-            "health": 150,
-            "inBattle": false
-        });
-        */
-        player = new Player(message.author.username)
-        console.log(player);
-        players.push(player);
-        checkData();
-        init();
+          // Increasing the players online count when someone joins
+          playersOnline++;
+          userJoined = true;
+
+          // Creates a new object to store information about the player who joined
+          /*
+          players.push({
+              "name": message.author.username,
+              "index": 99,
+              "health": 150,
+              "inBattle": false
+          });
+          */
+          player = new Player(message.author.username, args[0])
+          console.log(player);
+          players.push(player);
+          checkData();
+          init();
+        }
     }
 
     else if(command === 'commands'){
@@ -221,7 +226,8 @@ client.on('message', (message) => {
                 }
             }
             message.channel.send([`${tempLeave} has left the quest.`]);
-            // userJoined = false;
+            userJoined = false;
+            playersOnline--;
         }
 
         /* Rejuvanates players and monster hitpoints */

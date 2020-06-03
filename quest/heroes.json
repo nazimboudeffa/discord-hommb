@@ -137,5 +137,55 @@
       "gender" : "male",
       "speciality" : "enchanter"
     }
+  ],
+  "necropolis" :
+  [
+    {
+      "hero" : "ludmilla",
+      "faction" : "necropolis",
+      "classe" : "might",
+      "gender" : "female",
+      "speciality" : "ebonknight"
+    }
+  ],
+  "stronghold" :
+  [
+    {
+      "hero" : "bilashi",
+      "faction" : "stronghold",
+      "classe" : "might",
+      "gender" : "male",
+      "speciality" : "warmonger"
+    }
+  ],
+  "sylvan" :
+  [
+    {
+      "hero" : "ossir",
+      "faction" : "sylvan",
+      "classe" : "might",
+      "gender" : "male",
+      "speciality" : "avenger"
+    }
+  ],
+  "dungeon" :
+  [
+    {
+      "hero" : "sylsai",
+      "faction" : "dungeon",
+      "classe" : "might",
+      "gender" : "male",
+      "speciality" : "shadowslayer"
+    }
+  ],
+  "fortress" :
+  [
+    {
+      "hero" : "aslaug",
+      "faction" : "fortress",
+      "classe" : "might",
+      "gender" : "male",
+      "speciality" : "warlord"
+    }
   ]
 }
