@@ -107,7 +107,7 @@ client.on('message', (message) => {
         }
 
         if (!args.length) {
-      		return message.channel.send(`Type : h!join haven or academy, necropolis, stronghold, sylvan, dungeon, fortress", ${message.author}`);
+      		return message.channel.send(`Type : h!join haven or "academy, necropolis, stronghold, sylvan, dungeon, fortress", ${message.author}`);
       	} else {
 
           // Increasing the players online count when someone joins
