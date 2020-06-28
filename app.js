@@ -131,7 +131,7 @@ client.on('message', (message) => {
         }
     }
 
-    else if(command === 'commands'){
+    else if(command === 'help'){
 
         const exampleEmbed = {
         	color: 0x0099ff,
